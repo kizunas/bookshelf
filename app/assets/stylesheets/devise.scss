@@ -2,3 +2,11 @@ input[type="submit"][value="Cancel my account"] {
   @extend .btn !optional;
   @extend .btn-danger !optional;
 }
+
+body {
+  background-image: image-url("bookshelf.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  
+}
