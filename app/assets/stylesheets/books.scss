@@ -8,7 +8,7 @@
 .books-index-area {
   width: 100%;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: auto;
   height: calc(100% - 80px);
   max-height: calc(100% - 80px);
 }
@@ -21,5 +21,5 @@
 
 #grid {
   display: grid;
-  grid-template-columns: 10vw 80vw 10vx;
+  grid-template-columns: 25vw 25vw 25vw 25vw;
   }

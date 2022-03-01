@@ -2,6 +2,7 @@ class Book < ApplicationRecord
   belongs_to :user
   
   validates :title, presence: true
+  validates :title, uniqueness: true
   
   def self.search(keyword)
   where(["title like? OR body like?", "%#{keyword}%", "%#{keyword}%"])

@@ -1,7 +1,6 @@
-<!--// modalを閉じる処理-->
-$("#bookModal").modal("hide");
-$('body').removeClass('modal-open');
-$('.modal-backdrop').remove();
+<!--値をクリアしてfocusする-->
+$('.field input#tag_name').val("")
+$('.field input#tag_name').focus();
 
 
 <!--// Rails @status => true 画面の書き換え : false モーダルを再度表示-->
@@ -12,3 +11,16 @@ $("#booksIndex").append("<%= j(render @book) %>");
 $("#modalArea").html("<%= j(render 'books/form', book: @book) %>")
 $("#modalArea").find(".modal").modal('show')
 <% end %>
+
+
+
+
+
+
+<!--// modalを閉じる処理-->
+$("#bookModal").modal("hide");
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+
+
+
