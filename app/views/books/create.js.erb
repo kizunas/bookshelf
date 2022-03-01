@@ -1,0 +1,14 @@
+<!--// modalを閉じる処理-->
+$("#bookModal").modal("hide");
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+
+
+<!--// Rails @status => true 画面の書き換え : false モーダルを再度表示-->
+<!--//もし@status == true なら-->
+<% if @status %>
+$("#booksIndex").append("<%= j(render @book) %>");
+<% else %>
+$("#modalArea").html("<%= j(render 'books/form', book: @book) %>")
+$("#modalArea").find(".modal").modal('show')
+<% end %>

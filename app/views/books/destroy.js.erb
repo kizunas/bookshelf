@@ -1,0 +1,7 @@
+<!--// modalを閉じる処理-->
+$("#bookModal").modal("hide");
+$("body").removeClass("modal-open");
+$(".modal-backdrop").remove();
+
+<!--// 画面の書き換え-->
+$('[data-model_name="book"]').filter('[data-id="<%= @book.id %>"]').remove();
