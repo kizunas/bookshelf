@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tags
   resources :books
   
   get 'search' => 'books#search'
