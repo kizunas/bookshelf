@@ -5,7 +5,7 @@
   <% end %>
   
   <%  if current_user.books.exists?  %>
-  <%= link_to new_tag_path, class: "btn p-0 text-dark", remote: true do %>
+  <%= link_to search_path, class: "btn p-0 text-dark", remote: true do %>
     <span class="align-middle pr-1 btn btn-outline-danger">本のタイトルを検索</span>
   <% end %>
   <% end %>

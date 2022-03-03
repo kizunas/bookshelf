@@ -1,0 +1,43 @@
+<div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <%= form_with(model: book, url: book, remote: true) do |form| %>
+        <div class="modal-header">
+          <h5 class="modal-title" id="bookModal"><%= "#{params[:action].camelize} #{book.model_name.human}" %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <% if book.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
+              <ul>
+                <% book.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+                </ul>
+            </div>
+          <% end %>
+          
+          <div class="field">
+            <%= form.collection_check_boxes :tag_ids, current_user.tags, :id, :name do |b| %>
+              <%= b.label(class: "form-check") do %>
+                <%= b.check_box(class: "form-check-input") %>
+                <div class="btn btn-secondary" >
+              <%= b.text %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+
+          
+        </div>
+        <div class="modal-footer actions">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= form.submit %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

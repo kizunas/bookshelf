@@ -1,0 +1,21 @@
+<!--modalを閉じる処理-->
+$("#tagModal").modal("hide");
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+
+<% if @status %>
+<!--// すでに表示されているbooksを書き換え-->
+$('#booksIndex').html('<%= j(render partial: "books/book", collection: current_user.books, as: :book) %>')
+
+<!--// new tagモーダル画面に戻る（その際、作ったタグが表示されるようにtag:Tag.new）-->
+$("#modalArea").html("<%= j(render 'form', tag: Tag.new) %>")
+
+<!--// フォームにフォーカス-->
+$("#modalArea").find(".modal").on('shown.bs.modal', () => {
+    $("#modalArea").find("form input[type=text]")[0].focus();
+})
+
+<!--// モーダルを表示する。-->
+$("#modalArea").find(".modal").modal('show')
+
+<% end %>

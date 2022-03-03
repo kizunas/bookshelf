@@ -1,0 +1,14 @@
+<!--modalを閉じる処理-->
+$("#tagModal").modal("hide");
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+
+<!--// モーダルの書き換え-->
+$("#modalArea").html("<%= j(render 'edit_form', tag: @tag) %>")
+
+<!--// フォームにフォーカス-->
+$("#modalArea").find(".modal").on('shown.bs.modal', () => {
+    $("#modalArea").find("form input[type=text]")[0].focus();
+})
+<!--モーダルを表示-->
+$("#modalArea").find(".modal").modal('show')

@@ -1,4 +1,4 @@
-<div class="modal fade" id="dal" tabindex="-1" role="dialog" aria-labelledby="tagModalLabel">
+<div class="modal fade" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="tagModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <%= form_with(model: tag, remote: true) do |form| %>
@@ -14,7 +14,7 @@
               <h2><%= pluralize(tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
               <ul>
                 <% tag.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
+                  <li><%= message %></li>
                 <% end %>
               </ul>
             </div>
@@ -23,12 +23,13 @@
             <%= form.label :name %>
             <%= form.text_field :name %>
           </div>
-         <%= render 'index' %>
         </div>
         <div class="modal-footer actions">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <%= form.submit "タグを作成"%>
-       </div>
+          <%= link_to new_tag_path, remote: true do %>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <% end %>
+          <%= form.submit "タグの修正"%>
+        </div>
       <% end %>
     </div>
   </div>
