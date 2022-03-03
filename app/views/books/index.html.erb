@@ -3,6 +3,15 @@
   <%= link_to new_book_path, title: "New", class: "btn p-0 text-dark", remote: true do %>
     <span class="align-middle btn btn-outline-success">本のタイトルを登録</span>
   <% end %>
+  
+  <%  if current_user.books.exists?  %>
+  <%= link_to new_tag_path, class: "btn p-0 text-dark", remote: true do %>
+    <span class="align-middle pr-1 btn btn-outline-danger">本のタイトルを検索</span>
+  <% end %>
+  <% end %>
+  
+  
+  
 	<!--実際にbookが表示される部分-->
 </div>
 <div class="text-center py-3 text-nowrap books-index-area" id="booksIndex">
@@ -14,14 +23,7 @@
  
  
 
-<!--  <%= form_with model: @book, local: true do |form| %>-->
- <!--#titleの入力フォーム生成-->
-<!--  <%= form.text_field :title %> -->
-<!--#送信ボタンを生成-->
-<!--  <%= form.submit "登録" %> -->
 
-<!--</div>-->
-<!--<% end %>-->
 
 
   <!--<div class="search-form">-->
