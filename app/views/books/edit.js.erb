@@ -4,7 +4,7 @@ $('.modal-backdrop').remove();
 
 <!--// モーダル追加-->
 $("#modalArea").html(
-  "<%= j(render 'form', book: @book) %>"
+  "<%= j(render 'edit_form', book: @book) %>"
 );
 
 <!--// フォームにフォーカス-->
