@@ -5,6 +5,7 @@ class Book < ApplicationRecord
   accepts_nested_attributes_for :book_tags
   
   validates :title, presence: true, uniqueness: { scope: :user }
+  default_scope -> { order(created_at: :desc) }
   
   
   def self.search(keyword)
