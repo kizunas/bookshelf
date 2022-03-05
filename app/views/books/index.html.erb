@@ -5,7 +5,7 @@
   <% end %>
   
   <%  if current_user.books.exists?  %>
-  <%= link_to search_path, class: "btn p-0 text-dark", remote: true do %>
+  <%= link_to search_path, title: "New", class: "btn p-0 text-dark", remote: true do %>
     <span class="align-middle pr-1 btn btn-outline-danger">本のタイトルを検索</span>
   <% end %>
   <% end %>
@@ -26,17 +26,6 @@
 
 
 
-  <!--<div class="search-form">-->
-  <!--<%= form_with url: search_path, method: :get, local: true do |f| %>-->
-  <!--  <%= f.text_field :keyword, value: @keyword %>-->
-  <!--  <%= f.submit "検索" %>-->
-  <!--<% end %>-->
-  <!--</div>-->
-  <!--<div class="book-list">-->
-  <!--<% @books.each do |book| %>-->
-  <!--  <%= book.title %>-->
-  <!--<% end %>-->
-  <!--</div>-->
   
 
 

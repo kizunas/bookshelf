@@ -8,7 +8,17 @@ class Book < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
   
   
-  def self.search(keyword)
-  where(["title like? OR body like?", "%#{keyword}%", "%#{keyword}%"])
-  end
+   def self.looks(search, keyword)
+    if search == "perfect_match"
+      Book.where("title LIKE?","#{keyword}")
+    elsif search == "forward_match"
+       Book.where("title LIKE?","#{keyword}%")
+    elsif search == "backward_match"
+      Book.where("title LIKE?","%#{keyword}")
+    elsif search == "partial_match"
+       Book.where("title LIKE?","%#{keyword}%")
+    else
+       Book.all
+    end
+   end
 end

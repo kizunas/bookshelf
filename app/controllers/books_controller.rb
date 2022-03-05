@@ -9,9 +9,8 @@ class BooksController < ApplicationController
   
   
   def search
-  @books = Book.search(params[:keyword])
+  @books = Book.looks(params[:search], params[:keyword])
   @keyword = params[:keyword]
-  render "index"
   end
 
   # GET /books/1
@@ -66,6 +65,6 @@ class BooksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def book_params
-      params.require(:book).permit(:title, :user_id, tag_ids: [])
+      params.require(:book).permit(:title, :user_id)
     end
 end

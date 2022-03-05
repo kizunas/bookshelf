@@ -1,0 +1,33 @@
+<div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <%= form_with(model: books, url: search_path, local: true) do |form| %>
+        <div class="modal-header">
+          <h5 class="modal-title" id="bookModal"><%= "#{params[:action].camelize} #{books.model_name.human}title" %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+           <% if user_signed_in? %>
+            <div class="search_form">
+             <%= form.text_field :keyword %>
+             <%= form.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backword_match"], ["部分一致","partial_match"]]) %>
+             <%= form.submit "検索", class: "btn btn-primary" %>
+            </div>
+           <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<!--<div class="book-list">-->
+<!--              <% books.each do |books| %>-->
+<!--              <%= books.title %>-->
+<!--               <% if books == 0 %>-->
+<!--               <p>検索結果がありませんでした</p>-->
+<!--               <% end %>-->
+<!--              <% end %>-->
+<!--           </div>-->
