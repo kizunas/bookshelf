@@ -13,19 +13,19 @@
             <i class="fas fa-ellipsis-v align-middle"></i>
           </button>
           <div class="dropdown-menu dropdown-menu-right text-middle">
-            <%= link_to "修正", edit_book_path(book), class: "dropdown-item", remote: true %>
-            <%= link_to "タグ付け", new_tag_path(book), class: "dropdown-item", remote: true %>
-            <%= link_to "削除", book, method: :delete, class: "dropdown-item text-danger", remote: true, data: { confirm: 'Are you sure?' } %>
+            <%= link_to "タグ作成", new_tag_path(book), class: "dropdown-item", remote: true %>
+            <%= link_to "編集", edit_book_path(book), class: "dropdown-item", remote: true %>
+            <%= link_to "削除", book, method: :delete, class: "dropdown-item text-danger", remote: true, data: { confirm: '本当に削除しますか？' } %>
           </div>
         </div>
       </div>
     </div>
     
     <div class="card-text">
+      <%= render partial: "books/tag", collection: book.tags, as: :tag %>
       <small class="text-muted">
         <%= book.created_at.strftime('%Y/%m/%d') %>
       </small>
     </div>
-    <%= render partial: "books/tag", collection: book.tags, as: :tag %>
   </div>
 </div>
