@@ -1,7 +1,7 @@
 <div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <%= form_with(model: books, method: :get, url: search_path, remote: true) do |form| %>
+      <%= form_with(url: search_path, remote: true) do |form| %>
         <div class="modal-header">
           <h5 class="modal-title" id="bookModal"><%= "検索結果" %></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
@@ -10,14 +10,10 @@
         </div>
         <div class="modal-body">
           <div class="book-list">
-              <% books.each do |books| %>
-              <p><%= books.title %></p>
-              <% end %>
+               <p>一致するものは、ありません。</p>
           </div> 
         </div>
       <% end %>
     </div>
   </div>
 </div>
-
-  
