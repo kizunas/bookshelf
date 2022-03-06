@@ -9,7 +9,7 @@ class BooksController < ApplicationController
   
   
   def search
-  @books = Book.looks(params[:search], params[:keyword])
+  @books = current_user.books.all.looks(params[:search], params[:keyword])
   @keyword = params[:keyword]
   end
 
