@@ -18,3 +18,7 @@
 //= require jquery3
   //= require popper
   //= require bootstrap-sprockets
+   
+  $(function() {
+    setTimeout("$('#alertfadeout').fadeOut('slow')", 500);
+  });
