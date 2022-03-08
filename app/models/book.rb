@@ -15,7 +15,7 @@ class Book < ApplicationRecord
        if keyword.blank?
          @books = nil
        else
-       @books = Book.where("title LIKE?","%#{keyword}%")
+         @books = Book.where("title LIKE?","%#{keyword}%")
        end
     else
       @books = Book.all

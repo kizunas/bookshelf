@@ -33,7 +33,7 @@ class BooksController < ApplicationController
     if @book.save
        @status = true
     else
-      render :new
+       render :new
        @status = false
     end
   end

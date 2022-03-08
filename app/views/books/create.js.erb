@@ -1,6 +1,6 @@
 <!--値をクリアしてfocusする-->
-$('.field input#tag_name').val("")
-$('.field input#tag_name').focus();
+$('.field input#book_title').val("")
+$('.field input#book_title').focus();
 
 
 <!--// Rails @status => true 画面の書き換え : false モーダルを再度表示-->
@@ -11,11 +11,6 @@ $("#booksIndex").prepend("<%= j(render @book) %>");
 $("#modalArea").html("<%= j(render 'books/form', book: @book) %>")
 $("#modalArea").find(".modal").modal('show')
 <% end %>
-
-
-
-
-
 
 <!--// modalを閉じる処理-->
 $("#bookModal").modal("hide");
