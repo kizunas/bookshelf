@@ -21,10 +21,83 @@ body {
 .underline{
 // /*下線を引く*
 text-decoration:underline;
-// *下線を赤色*
-text-decoration-color:#FF0000;
+
+text-decoration-color:#e5e806;
 }
 
 .fontfamily{
     font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+
+.word-break{
+    word-break: break-all;
+}
+
+.py-10 {
+    padding-top: 40px!important;
+    padding-bottom: 40px!important;
+    
+}
+
+.pro_freeword_title {
+    text-align: center;
+}
+
+
+ .mb-8 {
+    margin-top: 32px!important;
+    margin-bottom: 32px!important;
+    margin-right: 60px!important;
+    margin-left: 60px!important;
+}
+
+.pro_merit_ul {
+    list-style-type: none;
+    display: flex;
+    width: 100vw;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    margin: -12px;
+}
+
+.pro_merit_li {
+    text-align: center;
+}
+
+.pro_merit_subtitle {
+    color: #39b671;
+    margin: 10px 0px;
+}
+
+.v-image {
+    color: rgba(0,0,0,.87);
+}
+
+.v-responsive {
+    position: relative;
+    overflow: hidden;
+    flex: 1 0 auto;
+    max-width: 100%;
+    display: flex;
+}
+
+.pro_merit_image {
+    width: 220px;
+    height: 180px;
+    margin: 0 auto;
+}
+
+.v-image__image {
+    background-image: image-url("books.jpg");
+    background-repeat: no-repeat;
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }

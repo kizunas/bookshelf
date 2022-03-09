@@ -9,13 +9,24 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-  
-    <%= render "layouts/flash" %>
-    
+      <%= render "layouts/flash" %>
       <div class="container">
         <%= yield %>
       </div>
-    
-    
+      <serection class="py-10">
+        <h2 class="pro_freeword_title mb-8 bg-white">本を管理しよう!!</h2>
+        <ul class="pro_merit_ul">
+          <div class="row justify-center">
+            <div class= "pa-0 mb-3 col-sm-4 col-md-4 col-lg-3 col-12">
+              <li class="pro_merit_li">
+                <h3 class="pro_merit_subtitle">1.本を登録する</h3>
+                <div class="v-image v-responsive pro_merit_image ">
+                  <img class="v-image__image">
+                </div>
+              </li>
+            </div>
+          </div>
+        </ul>
+      </serection>
   </body>
 </html>

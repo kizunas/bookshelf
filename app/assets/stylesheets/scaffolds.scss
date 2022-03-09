@@ -5,11 +5,12 @@
 }
 
 #error_explanation {
-  width: 450px;
+  
   border: 2px solid red;
   padding: 7px 7px 0;
   margin-bottom: 20px;
   background-color: #f0f0f0;
+  
 
   h2 {
     text-align: left;
@@ -19,6 +20,7 @@
     margin: -7px -7px 0;
     background-color: #c00;
     color: #fff;
+    word-break: break-all;
   }
 
   ul li {
