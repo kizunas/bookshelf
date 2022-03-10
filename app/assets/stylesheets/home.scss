@@ -11,11 +11,9 @@ body {
 
 
 #wrapper {
-	width: 50%;
-	margin: auto;
-	padding: 10px;
-	border: 0px;
-	background-color: #FFF;	
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    font-size: 17px;
+    overflow: auto;
 
 }
 
@@ -26,9 +24,6 @@ text-decoration:underline;
 text-decoration-color:#e5e806;
 }
 
-.fontfamily{
-    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-}
 
 .word-break{
     word-break: break-all;
@@ -64,17 +59,17 @@ $sp: 575px;  // スマホ
 }
 
 
- .mb-8.pro_merit_ul {
+ .pro_merit_ul {
     margin-top: 32px!important;
     margin-bottom: 32px!important;
     margin-right: 60px!important;
-    margin-left: 60px!important;
+    // margin-left: 60px!important;
 }
 
 
 
 .pro_merit_ul{
-    @include pc {
+  @include pc {
      list-style-type: none;
     display: flex;
     justify-content: center;

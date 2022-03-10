@@ -18,7 +18,10 @@
                 <% end %>
               </ul>
             </div>
-          <% end %>
+            <div class="modal-footer actions">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <% else %>
+          
           <div class="field">
             <%= form.label :title %>
             <%= form.text_field :title, placeholder: "登録する本のタイトルを入力してください。"  %>
@@ -39,6 +42,7 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
           <%= form.submit "タイトルを登録"%>
         </div>
+        <% end %>
       <% end %>
     </div>
   </div>

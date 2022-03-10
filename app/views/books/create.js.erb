@@ -10,12 +10,13 @@ $("#booksIndex").prepend("<%= j(render @book) %>");
 <% else %>
 $("#modalArea").html("<%= j(render 'books/form', book: @book) %>")
 $("#modalArea").find(".modal").modal('show')
-<% end %>
-
 <!--// modalを閉じる処理-->
 $("#bookModal").modal("hide");
 $('body').removeClass('modal-open');
 $('.modal-backdrop').remove();
+<% end %>
+
+
 
 
 
