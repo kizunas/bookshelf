@@ -9,6 +9,7 @@ body {
   
 }
 
+
 #wrapper {
 	width: 50%;
 	margin: auto;
@@ -33,9 +34,11 @@ text-decoration-color:#e5e806;
     word-break: break-all;
 }
 
+
+
 $pc: 1024px; // PC
-$tab: 680px; // タブレット
-$sp: 480px;  // スマホ
+$tab: 992px; // タブレット
+$sp: 575px;  // スマホ
 
 @mixin pc {
   @media (min-width: ($pc)) {
@@ -54,18 +57,14 @@ $sp: 480px;  // スマホ
 }
 
 
-.py-10 {
-    padding-top: 40px!important;
-    padding-bottom: 40px!important;
-    
-}
+
 
 .pro_freeword_title {
     text-align: center;
 }
 
 
- .mb-8 {
+ .mb-8.pro_merit_ul {
     margin-top: 32px!important;
     margin-bottom: 32px!important;
     margin-right: 60px!important;

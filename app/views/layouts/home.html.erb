@@ -12,11 +12,10 @@
       <%= render "layouts/flash" %>
       <div class="container">
         <%= yield %>
-      </div>
-      <serection class="py-10">
-        <h2 class="pro_freeword_title mb-8 bg-white">本を管理しよう!!</h2>
+      
+      <div class="mt-5">
         <ul class="pro_merit_ul">
-            <div class= " pa-0 mb-3 col-sm-6 col-md-7 col-lg-4 col-">
+            <div class= " pa-0 mb-3 col-sm-6 col-md-7 col-lg-4 col-xl-3 col-">
               <li class="pro_merit_li">
                 <h3 class="pro_merit_subtitle">本をコレクション</h3>
                 <div class="v-image v-responsive pro_merit_image ">
@@ -25,7 +24,7 @@
                 <p class="pro_merit_text">本を登録、タグ付けできます。</p>
               </li>
             </div>
-            <div class= "pa-0 mb-3 col-sm-6 col-md-7 col-lg-4">
+            <div class= "pa-0 mb-3 col-sm-6 col-md-7 col-lg-4 col-xl-3">
               <li class="pro_merit_li">
                 <h3 class="pro_merit_subtitle">もう同じ本は買わない</h3>
                 <div class="v-image v-responsive pro_merit_image ">
@@ -35,6 +34,7 @@
               </li>
             </div>
         </ul>
-      </serection>
+      </div>
+      </div>
   </body>
 </html>
