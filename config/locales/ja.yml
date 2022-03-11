@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      book:
+      tag: 
+    attributes:
+      book:
+        title: タイトル 
+      tag:
+        name: タグ名
+        
