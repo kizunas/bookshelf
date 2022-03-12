@@ -7,6 +7,9 @@ $('.field input#book_title').focus();
 <!--//もし@status == true なら-->
 <% if @status %>
 $("#booksIndex").prepend("<%= j(render @book) %>");
+<!--登録冊数をカウントし表示-->
+cnt += 1;
+$("#count").text(cnt + "冊 登録しました。");
 <% else %>
 $("#modalArea").html("<%= j(render 'books/form', book: @book) %>")
 $("#modalArea").find(".modal").modal('show')
