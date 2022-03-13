@@ -21,7 +21,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
-        render template: "tags/create", @tag => user_signed_in(Tag_id: 1, Tag_name: "お気に入り")
+        current_user.tags.create!(name: "お気に入り" )
       else
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
