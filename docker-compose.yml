@@ -5,10 +5,10 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
+      POSTGRES_USER: 'root'
+      POSTGRES_PASSWORD: 'password'
     volumes:
-      - app_postgre:/var/lib/postgres
+      - ./tmp/db:/var/lib/postgresql/data
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -18,8 +18,3 @@ services:
       - "3000:3000"
     depends_on:
       - db
-
-#下記はWindowsの場合追加
-volumes:
-  app_postgre:
-    external: true
