@@ -29,6 +29,10 @@ RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
-# Rails サーバ起動
-CMD ["rails", "server", "-b", "0.0.0.0"]
+# ローカル開発環境のstart.shの内容をDockerコンテナ上の/start.shにコピー
+COPY start.sh /start.sh
+# Docker側の下記のファイルに実行権限を渡すので権限を変更する
+RUN chmod 744 /start.sh
+# 実行
+CMD ["sh", "/start.sh"]
 
