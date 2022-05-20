@@ -1,0 +1,15 @@
+<div class="rakutenbooksearchbtn ml-auto mb-3">
+    <%= link_to "検索画面へ戻る",new_rakutenbook_path, class: "form-control btn btn-success" %>
+</div>
+
+<% @books.each do |book| %>
+  <div class="card mb-3">
+    <div class="card-body">
+     <p class="card-text">
+      <%= book.title %>
+      <span class="badge badge-warning"><%= book.sales_date %></span>
+     </p>
+     <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
+    </div>
+  </div>
+<% end %>

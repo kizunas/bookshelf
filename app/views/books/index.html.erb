@@ -3,25 +3,19 @@
   <%= link_to new_book_path, title: "New", class: "btn p-0 text-dark", remote: true do %>
     <span class="align-middle btn btn-outline-success">本のタイトルを登録</span>
   <% end %>
-  
   <%  if current_user.books.exists?  %>
-        
-           <% if user_signed_in? %>
-            <span class="align-middle pr-1 btn btn-outline-danger">
-            <div class="search_form">
+      <% if user_signed_in? %>
+        <span class="align-middle pr-1 btn btn-outline-danger">
+          <div class="search_form">
              <%= form_with(model: @book, method: :get, url: search_path, remote: true) do |form| %>
-             <%= form.text_field :keyword, placeholder: "本のタイトルを入力" %>
-             <%= form.select :search, options_for_select([["完全一致","perfect_match"], ["部分一致","partial_match"]]) %>
-             <%= form.submit "検索", class: "btn btn-primary" %>
-             <% end %>
-            </div>
-            </span>
-           <% end %>
-        
+                <%= form.text_field :keyword, placeholder: "本のタイトルを入力" %>
+                <%= form.select :search, options_for_select([["完全一致","perfect_match"], ["部分一致","partial_match"]]) %>
+                <%= form.submit "検索", class: "btn btn-primary" %>
+              <% end %>
+          </div>
+        </span>
+      <% end %>
   <% end %>
-  
-  
-  
 	<!--実際にbookが表示される部分-->
 </div>
 <div class="text-center py-3 text-nowrap books-index-area" id="booksIndex">
