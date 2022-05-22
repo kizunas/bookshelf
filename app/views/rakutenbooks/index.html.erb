@@ -11,7 +11,8 @@
           <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
          </div>
          <div class="col-6">
-         <span class="badge badge-warning"><%= book.sales_date %></span>
+         <span class="badge badge-warning"><%= "発売日:#{book.sales_date}" %></span>
+         <span class="badge badge-success"><%= "著者: #{book.author}" %></span>
          <br>
          <%= link_to book.title, book.item_url %>
          </div>
