@@ -15,7 +15,10 @@
     <ul class="navbar-nav ml-auto">
 <!--// もしユーザーがログインしているならば下記を表示-->
       <%  if user_signed_in?  %>
-        <li class="nav-item">
+        <li class="nav-item ml-auto">
+          <%= link_to "楽天books", new_rakutenbook_path, method: :get, class: "nav-link" %>
+        </li>
+        <li class="nav-item ml-auto">
           <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
         </li>
 <!--//ログインしていないのなら下記を表示-->

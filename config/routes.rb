@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :tags
   resources :books
+  resources :rakutenbooks, only: [:new, :index]
+  
   
   get 'search' => 'books#search'
   
