@@ -1,0 +1,2 @@
+module RakutenbooksHelper
+end

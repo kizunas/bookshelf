@@ -17,6 +17,9 @@ module Bookshelf
     # the framework and any gems in your application.
     
     config.i18n.default_locale = :ja
+    #日本時間へ変更
+    config.time_zone = 'Tokyo'
+  
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
     
     config.to_prepare do

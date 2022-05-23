@@ -1,0 +1,8 @@
+<div class="rakutenbooksearch">
+  <%= form_with url: rakutenbooks_path , method: :get, local: true do |f| %>
+      <%= f.text_field :keyword, placeholder: "本のタイトルを入力", autofocus:true, class: "form-control" %>
+        <div class="rakutenbooksearchbtn ml-auto">
+            <%= f.submit '本の題名を検索', class: "form-control btn btn-success" %>
+        </div>
+  <% end %>
+</div>
