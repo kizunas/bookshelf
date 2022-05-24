@@ -21,7 +21,7 @@ jobs:
     # ここでは、2 つの Docker イメージを設定します。
     docker:
       - image: circleci/ruby:2.6.3-node # プライマリ Docker イメージです。ここでステップコマンドが実行されます。
-      - image: circleci/postgres:14.0
+      - image: cimg/postgres:14.0
         environment: # add POSTGRES environment variables.
           POSTGRES_USER: root
           POSTGRES_DB: myapp_test
