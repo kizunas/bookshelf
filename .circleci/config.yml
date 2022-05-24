@@ -22,9 +22,9 @@ jobs:
     docker:
       - image: circleci/ruby:2.6.3-node # プライマリ Docker イメージです。ここでステップコマンドが実行されます。
       - image: circleci/postgres:14.0
-          POSTGRES_USER: "root"
-          POSTGRES_DB: "myapp_test"
-          POSTGRES_PASSWORD: "password"    
+          POSTGRES_USER: 'root'
+          POSTGRES_DB: myapp_test
+          POSTGRES_PASSWORD: password     
         environment:
           BUNDLE_JOBS: "3"
           BUNDLE_RETRY: "3"
