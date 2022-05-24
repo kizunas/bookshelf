@@ -38,16 +38,15 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
-  - run:
-      name: rails db:migrate
-      command: bundle exec rails db:migrate
-  - run:
-      name: Database setup
-      command: bundle exec rails db:schema:load --trace  #migrateによって作られたschema.rbをload
-  - run:
-      name: Rspec #テストコード
-      command: bundle exec rspec
-
+      - run:
+          name: rails db:migrate
+          command: bundle exec rails db:migrate
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace  #migrateによって作られたschema.rbをload
+      - run:
+          name: Rspec #テストコード
+          command: bundle exec rspec
 # ワークフローを使って上記で宣言したジョブをオーケストレーションします。
 
 workflows:
