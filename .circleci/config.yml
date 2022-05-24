@@ -21,7 +21,7 @@ jobs:
     # ここでは、2 つの Docker イメージを設定します。
     docker:
       - image: circleci/ruby:2.6.3-node # プライマリ Docker イメージです。ここでステップコマンドが実行されます。
-      - image: circleci/postgres:14.0
+      - image: circleci/postgres:14.0-postgis
         environment: # add POSTGRES environment variables.
           POSTGRES_USER: root
           POSTGRES_DB: myapp_test
@@ -30,7 +30,9 @@ jobs:
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
-      MYAPP_DATABASE_HOST: 127.0.0.1
+      PGHOST: 127.0.0.1
+      PGUSER: root
+      PGPASSWORD: password
       RAILS_ENV: test
     # 実行する一連のステップです。「ビルド」のステップと似たステップもあります。
     steps:
