@@ -9,7 +9,7 @@ orbs:
 jobs:
   build: #  "build"という名前の最初のジョブです。
     docker:
-      - image: cimg/ruby:2.6.3-node # カスタマイズされた CircleCI Docker イメージを使用します。
+      - image: circleci/ruby:2.6.3-node # カスタマイズされた CircleCI Docker イメージを使用します。
     steps:
       - checkout # Git コードをプルダウンします。
       - ruby/install-deps # Ruby Orb を使って依存関係をインストールします。
@@ -20,7 +20,7 @@ jobs:
     parallelism: 3
     # ここでは、2 つの Docker イメージを設定します。
     docker:
-      - image: cimg/ruby:2.6.3-node # プライマリ Docker イメージです。ここでステップコマンドが実行されます。
+      - image: circleci/ruby:2.6.3-node # プライマリ Docker イメージです。ここでステップコマンドが実行されます。
       - image: cimg/postgres:14.0
         environment: # add POSTGRES environment variables.
           POSTGRES_USER: root
