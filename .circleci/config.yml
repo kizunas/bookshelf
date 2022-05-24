@@ -1,0 +1,57 @@
+version: 2.1 # 2.1 を使うと Orb や他の機能を使用することができます。 
+
+# 設定で使用する Orb を宣言します。
+# Orb に関する詳細は、 https://circleci.com/docs/ja/2.0/orb-intro/ をご覧ください。
+orbs:
+  ruby: circleci/ruby@1.0
+  node: circleci/node@2
+
+jobs:
+  build: #  "build"という名前の最初のジョブです。
+    docker:
+      - image: circleci/ruby:2.6.3-node # カスタマイズされた CircleCI Docker イメージを使用します。
+    steps:
+      - checkout # Git コードをプルダウンします。
+      - ruby/install-deps # Ruby Orb を使って依存関係をインストールします。
+
+  test:  # "test"という名前の２つ目のジョブです。
+    # テストを高速化するために「並列ジョブコンテナ」を実行します。
+    # これによりテストが複数のコンテナに分割されます。
+    parallelism: 3
+    # ここでは、2 つの Docker イメージを設定します。
+    docker:
+      - image: circleci/ruby:2.6.3-node # プライマリ Docker イメージです。ここでステップコマンドが実行されます。
+      - image: cimg/postgres:14.0
+          POSTGRES_USER: root
+          POSTGRES_DB: myapp_test
+          POSTGRES_PASSWORD: password     
+        environment:
+          BUNDLE_JOBS: "3"
+          BUNDLE_RETRY: "3"
+          PGHOST: 127.0.0.1
+          PGUSER: root
+          PGPASSWORD: password
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: rails db:migrate
+          command: bundle exec rails db:migrate
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace  #migrateによって作られたschema.rbをload
+      - run:
+          name: Rspec #テストコード
+          command: bundle exec rspec
+
+# ワークフローを使って上記で宣言したジョブをオーケストレーションします。
+
+workflows:
+  version: 2
+  build_and_test:     # ワークフローの名前は "build_and_test" です。
+    jobs:             # このワークフローの一部として実行するジョブのリストです。
+      - build         # まず、ビルドを実行します。
+
+      - test:         # 次に、テストを実行します。
+          requires:   # テストを実行するにはビルドを渡す必要があります。
+            - build   # 最後に、ビルドしたジョブを実行します。
