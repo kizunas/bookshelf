@@ -20,31 +20,33 @@ jobs:
     parallelism: 3
     # ここでは、2 つの Docker イメージを設定します。
     docker:
-      - image: circleci/ruby:2.6.3-node # プライマリ Docker イメージです。ここでステップコマンドが実行されます。
+      - image: cimg/ruby:2.7-node # プライマリ Docker イメージです。ここでステップコマンドが実行されます。
       - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD     
-        environment:
-          BUNDLE_JOBS: "4"
-          BUNDLE_RETRY: "3"
+        environment: # add POSTGRES environment variables.
           POSTGRES_USER: root
           POSTGRES_DB: myapp_test
-          PGHOST: 127.0.0.1
           POSTGRES_PASSWORD: password
-          POSTGRES_HOST_AUTH_METHOD: trust
+    # Ruby/Rails 固有の環境変数をプライマリコンテナに適用します。
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      PGHOST: 127.0.0.1
+      PGUSER: root
+      PGPASSWORD: password
+      RAILS_ENV: test
+    # 実行する一連のステップです。「ビルド」のステップと似たステップもあります。
     steps:
       - checkout
       - ruby/install-deps
-      - run:
-          name: rails db:migrate
-          command: bundle exec rails db:migrate
-      - run:
-          name: Database setup
-          command: bundle exec rails db:schema:load --trace  #migrateによって作られたschema.rbをload
-      - run:
-          name: Rspec #テストコード
-          command: bundle exec rspec
+  - run:
+      name: rails db:migrate
+      command: bundle exec rails db:migrate
+  - run:
+      name: Database setup
+      command: bundle exec rails db:schema:load --trace  #migrateによって作られたschema.rbをload
+  - run:
+      name: Rspec #テストコード
+      command: bundle exec rspec
 
 # ワークフローを使って上記で宣言したジョブをオーケストレーションします。
 
@@ -56,4 +58,4 @@ workflows:
 
       - test:         # 次に、テストを実行します。
           requires:   # テストを実行するにはビルドを渡す必要があります。
-            - build   # 最後に、ビルドしたジョブを実行します。
+            - build   # 最後に、ビルドしたジョブを実行します。 
