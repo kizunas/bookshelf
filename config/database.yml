@@ -28,6 +28,8 @@ default: &default
 development:
   <<: *default
   database: myapp_development
+  host: <%= ENV.fetch("PGHOST") { 'db' } %>
+#circleciの時は環境変数を適用するようにhostを記述。ローカルではdbが使われる。
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
