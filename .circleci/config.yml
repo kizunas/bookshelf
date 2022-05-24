@@ -28,6 +28,7 @@ jobs:
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: myapp_test
+          POSTGRES_PASSWORD: password
     steps:
       - checkout
       - ruby/install-deps
