@@ -13,12 +13,6 @@ jobs:
     steps:
       - checkout # Git コードをプルダウンします。
       - ruby/install-deps # Ruby Orb を使って依存関係をインストールします。
-      # Node Orb を使ってパッケージをインストールします。
-      # Yarn の使用および 依存関係のキャッシュに yarn.lock の使用を指定します。
-      # 詳細は、 https://circleci.com/docs/2.0/caching/ を参照してください。
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-key: "yarn.lock"
 
   test:  # "test"という名前の２つ目のジョブです。
     # テストを高速化するために「並列ジョブコンテナ」を実行します。
@@ -26,46 +20,33 @@ jobs:
     parallelism: 3
     # ここでは、2 つの Docker イメージを設定します。
     docker:
-      - image: cimg/ruby:2.7-node # プライマリ Docker イメージです。ここでステップコマンドが実行されます。
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/ruby:2.6.3-node # プライマリ Docker イメージです。ここでステップコマンドが実行されます。
+      - image: circleci/postgres:14.0
         environment: # add POSTGRES environment variables.
-          POSTGRES_USER: circleci-demo-ruby
-          POSTGRES_DB: rails_blog_test
-          POSTGRES_PASSWORD: ""
+          POSTGRES_USER: root
+          POSTGRES_DB: myapp_test
+          POSTGRES_PASSWORD: password
     # Ruby/Rails 固有の環境変数をプライマリコンテナに適用します。
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
       PGHOST: 127.0.0.1
-      PGUSER: circleci-demo-ruby
-      PGPASSWORD: ""
+      PGUSER: root
+      PGPASSWORD: password
       RAILS_ENV: test
     # 実行する一連のステップです。「ビルド」のステップと似たステップもあります。
     steps:
       - checkout
       - ruby/install-deps
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-key: "yarn.lock"
-      # ここでは、データベース上で実行する前に
-      # セカンダリコンテナが起動することを確認します。
-
-  - run:
-      name: DB の待機
-      command: dockerize -wait tcp://localhost:5432 -timeout 1m
-
-  - run:
-      name: データベースのセットアップ
-      command: bundle exec rails db:schema:load --trace
-      # RSpec を並列実行します。
-      - ruby/rspec-test
-
+      - run:
+          name: rails db:migrate
+          command: bundle exec rails db:migrate
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace  #migrateによって作られたschema.rbをload
+      - run:
+          name: Rspec #テストコード
+          command: bundle exec rspec
 # ワークフローを使って上記で宣言したジョブをオーケストレーションします。
 
 workflows:
@@ -76,4 +57,4 @@ workflows:
 
       - test:         # 次に、テストを実行します。
           requires:   # テストを実行するにはビルドを渡す必要があります。
-            - build   # 最後に、ビルドしたジョブを実行します。
+            - build   # 最後に、ビルドしたジョブを実行します。 
