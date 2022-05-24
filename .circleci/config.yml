@@ -30,9 +30,7 @@ jobs:
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
-      PGHOST: 127.0.0.1
-      PGUSER: root
-      PGPASSWORD: password
+      MYAPP_DATABASE_HOST: 127.0.0.1
       RAILS_ENV: test
     # 実行する一連のステップです。「ビルド」のステップと似たステップもあります。
     steps:
@@ -41,9 +39,9 @@ jobs:
       - run:
           name: rails db:migrate
           command: bundle exec rails db:migrate
-      # - run:
-      #     name: Database setup
-      #     command: bundle exec rails db:schema:load --trace  #migrateによって作られたschema.rbをload
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace  #migrateによって作られたschema.rbをload
       - run:
           name: Rspec #テストコード
           command: bundle exec rspec
