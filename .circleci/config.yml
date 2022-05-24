@@ -21,16 +21,18 @@ jobs:
     # ここでは、2 つの Docker イメージを設定します。
     docker:
       - image: circleci/ruby:2.6.3-node # プライマリ Docker イメージです。ここでステップコマンドが実行されます。
-      - image: circleci/postgres:14.0
-          POSTGRES_USER: 'root'
-          POSTGRES_DB: myapp_test
-          POSTGRES_PASSWORD: password     
+      - image: cimg/postgres:14.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD     
         environment:
-          BUNDLE_JOBS: "3"
+          BUNDLE_JOBS: "4"
           BUNDLE_RETRY: "3"
+          POSTGRES_USER: root
+          POSTGRES_DB: myapp_test
           PGHOST: 127.0.0.1
-          PGUSER: root
-          PGPASSWORD: password
+          POSTGRES_PASSWORD: password
+          POSTGRES_HOST_AUTH_METHOD: trust
     steps:
       - checkout
       - ruby/install-deps
