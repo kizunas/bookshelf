@@ -21,20 +21,13 @@ jobs:
     # ここでは、2 つの Docker イメージを設定します。
     docker:
       - image: circleci/ruby:2.6.3-node # プライマリ Docker イメージです。ここでステップコマンドが実行されます。
-      - image: circleci/postgres:14.0-postgis
-        environment: # add POSTGRES environment variables.
+      - image: cimg/postgres:14.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD     
+        environment:
           POSTGRES_USER: root
           POSTGRES_DB: myapp_test
-          POSTGRES_PASSWORD: password
-    # Ruby/Rails 固有の環境変数をプライマリコンテナに適用します。
-    environment:
-      BUNDLE_JOBS: "3"
-      BUNDLE_RETRY: "3"
-      PGHOST: 127.0.0.1
-      PGUSER: root
-      PGPASSWORD: password
-      RAILS_ENV: test
-    # 実行する一連のステップです。「ビルド」のステップと似たステップもあります。
     steps:
       - checkout
       - ruby/install-deps
