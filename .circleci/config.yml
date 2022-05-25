@@ -5,6 +5,7 @@ version: 2.1 # 2.1 を使うと Orb や他の機能を使用することがで�
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2
+  heroku: circleci/heroku@1.2.6
 
 jobs:
   build: #  "build"という名前の最初のジョブです。
@@ -49,12 +50,40 @@ jobs:
           command: bundle exec rspec
 # ワークフローを使って上記で宣言したジョブをオーケストレーションします。
 
+  deploy:
+    docker:
+      - image: circleci/ruby:2.6.3-node
+    steps:
+      - checkout
+      - setup_remote_docker: #dockerコマンドが使えるように
+          version: 20.10.14
+      - heroku/install #herokuコマンドを使えるように
+      - run:
+          name: heroku login
+          command: heroku container:login
+      - run:
+          name: push docker image
+          command: heroku container:push web -a $HEROKU_APP_NAME
+      - run:
+          name: release docker image
+          command: heroku container:release web -a $HEROKU_APP_NAME
+      - run:
+          name: database setup
+          command: heroku run bundle exec rake db:migrate RAILS_ENV=production -a $HEROKU_APP_NAME
+
 workflows:
   version: 2
-  build_and_test:     # ワークフローの名前は "build_and_test" です。
+  build_test_and_deploy:     # ワークフローの名前は "build_test_and_deploy" です。
     jobs:             # このワークフローの一部として実行するジョブのリストです。
       - build         # まず、ビルドを実行します。
 
       - test:         # 次に、テストを実行します。
           requires:   # テストを実行するにはビルドを渡す必要があります。
             - build   # 最後に、ビルドしたジョブを実行します。 
+
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master #branchがmasterの時のみ実行
