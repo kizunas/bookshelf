@@ -7,10 +7,6 @@ class TagsController < ApplicationController
     @tags = current_user.tags.all
   end
 
-  # GET /tags/1
-  def show
-  end
-
   # GET /tags/new
   def new
     @tag = current_user.tags.new
