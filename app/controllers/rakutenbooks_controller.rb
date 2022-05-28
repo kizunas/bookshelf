@@ -1,7 +1,7 @@
 class RakutenbooksController < ApplicationController
 
  # 表示件数
-  PER = 30
+   DISPLAY_RESULT_COUNT = 30
 
     def new
     end
@@ -20,12 +20,12 @@ class RakutenbooksController < ApplicationController
                 @books_full.push(book)
               end
             end
-            @books = Kaminari.paginate_array(@books_full).page(params[:page]).per(PER)
+            @books = Kaminari.paginate_array(@books_full).page(params[:page]).per(DISPLAY_RESULT_COUNT)
           else
             @rakuten_books.each do |book|
               @books_full.push(book)
             end
-              @books = Kaminari.paginate_array(@books_full).page(params[:page]).per(PER)
+              @books = Kaminari.paginate_array(@books_full).page(params[:page]).per(DISPLAY_RESULT_COUNT)
           end
         else
           respond_to do |format|

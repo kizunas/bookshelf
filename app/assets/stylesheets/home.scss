@@ -33,6 +33,7 @@ text-decoration-color:#e5e806;
 $pc: 1024px; // PC
 $tab: 992px; // タブレット
 $sp: 575px;  // スマホ
+$under:574px; // より小さいサイズ
 
 @mixin pc {
   @media (min-width: ($pc)) {
@@ -46,6 +47,11 @@ $sp: 575px;  // スマホ
 }
 @mixin sp {
   @media (min-width: ($sp)) {
+    @content;
+  }
+}
+@mixin under {
+  @media (max-width: ($under)) {
     @content;
   }
 }
@@ -80,9 +86,18 @@ $sp: 575px;  // スマホ
   @include sp {
     list-style-type: none;
     display: flex;  
-    align-content: center;
+    justify-content: center;
+  };
+  @include under {
+    list-style-type: none;
+    display: flex;  
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 30%;
+    margin-right: 30%;
   };
 };
+
 
 .cen {
     display: flex;
@@ -93,7 +108,7 @@ $sp: 575px;  // スマホ
     list-style-type: none;
     text-align: center;
     background-color: white;
-    border-radius: 3% 3%;
+    border-radius: 10% 10%;
 }
 
 .pro_merit_subtitle {
