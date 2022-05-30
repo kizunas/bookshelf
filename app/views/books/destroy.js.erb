@@ -3,5 +3,8 @@ $("#bookModal").modal("hide");
 $("body").removeClass("modal-open");
 $(".modal-backdrop").remove();
 
+<!--// モーダル表示-->
+$("#modalArea").find(".modal").modal("show");
+
 <!--// 画面の書き換え-->
 $('[data-model_name="book"]').filter('[data-id="<%= @book.id %>"]').remove();
