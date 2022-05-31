@@ -1,10 +1,17 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: [:edit, :update, :destroy]
 
   # GET /books
   def index
-    @books = current_user.books.all
+    @allbooks = current_user.books.all
+    @title = Book.select(:title).first
+    if @title === RakutenWebService::Books::Book.search(title: Book.select(:title).first, sort: '-releaseDate')
+      @books = RakutenWebService::Books::Book.search(title: Book.select(:title).first, sort: '-releaseDate')
+      @rakuten = true
+    else
+      @books = @allbooks
+    end
   end
   
   
@@ -51,7 +58,6 @@ class BooksController < ApplicationController
   # DELETE /books/1
   def destroy
     @book.destroy
-    
   end
 
   private

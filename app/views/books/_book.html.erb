@@ -1,13 +1,31 @@
-<div class="card bg-white d-block text-wrap h-80 my-2 book-card"
-  data-model_name="<%= Book.model_name.singular %>"
+  <div class="card mb-3" data-model_name="<%= Book.model_name.singular %>"
   data-id="<%= book.id %>">
-  <div class="d-flex flex-column h-80">
-    <div class="font-weight-bold px-4 py-2 book-header">
-      <div class="pr-10">
-        <%= book.title %> 
-      </div>
-      <div class="text-right position-absolute" style="top: 4px; right: 4px">
-        
+    <div class="card-body">
+     <p class="card-text">
+       <div class="cen">
+        <div class="col-2">
+         <% if @rakuten %>
+          <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
+         <% else %>
+         <p class="badge badge-danger">no-image</p>
+         <% end %> 
+        </div>
+        <div class="col-6">
+         <% if @rakuten %>
+          <span class="badge badge-warning"><%= "発売日:#{book.sales_date}" %></span>
+          <span class="badge badge-success"><%= "著者: #{book.author}" %></span>
+          <br>
+         <% end %> 
+          <%= book.title %> 
+          <br>
+          <%= render partial: "books/tag", collection: book.tags, as: :tag %>
+          <br>
+          <small class="text-muted">
+            <%= book.created_at.strftime('%Y/%m/%d') %>
+          </small>          
+        </div>
+       </div>
+     <div class="text-right position-absolute" style="top: 4px; right: 4px">
         <div class="btn-group">
           <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-ellipsis-v align-middle"></i>
@@ -18,13 +36,7 @@
             <%= link_to "削除", book, method: :delete, class: "dropdown-item text-danger", remote: true, data: { confirm: '本当に削除しますか？' } %>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="card-text">
-      <%= render partial: "books/tag", collection: book.tags, as: :tag %>
-      <small class="text-muted">
-        <%= book.created_at.strftime('%Y/%m/%d') %>
-      </small>
+     </div>
     </div>
   </div>
-</div>
+
