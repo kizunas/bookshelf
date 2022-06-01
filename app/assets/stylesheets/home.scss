@@ -6,19 +6,18 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  
 }
 
 
 #wrapper {
     font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-    font-size: 17px;
-    overflow: auto;
-
+    width: 70.6em;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .underline{
-// /*下線を引く*
+// 下線を引く
 text-decoration:underline;
 
 text-decoration-color:#e5e806;
@@ -34,6 +33,7 @@ text-decoration-color:#e5e806;
 $pc: 1024px; // PC
 $tab: 992px; // タブレット
 $sp: 575px;  // スマホ
+$under:574px; // より小さいサイズ
 
 @mixin pc {
   @media (min-width: ($pc)) {
@@ -50,6 +50,11 @@ $sp: 575px;  // スマホ
     @content;
   }
 }
+@mixin under {
+  @media (max-width: ($under)) {
+    @content;
+  }
+}
 
 
 
@@ -60,10 +65,9 @@ $sp: 575px;  // スマホ
 
 
  .pro_merit_ul {
-    margin-top: 32px!important;
-    margin-bottom: 32px!important;
-    margin-right: 60px!important;
-    // margin-left: 60px!important;
+    padding-left: 0px;
+    // margin-top: 32px!important;
+    // margin-bottom: 32px!important;
 }
 
 
@@ -82,11 +86,20 @@ $sp: 575px;  // スマホ
   @include sp {
     list-style-type: none;
     display: flex;  
-    align-content: center;
+    justify-content: center;
+  };
+  @include under {
+    list-style-type: none;
+    display: flex;  
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 30%;
+    margin-right: 30%;
   };
 };
 
-.row {
+
+.cen {
     display: flex;
     justify-content: center;
 }
@@ -95,7 +108,7 @@ $sp: 575px;  // スマホ
     list-style-type: none;
     text-align: center;
     background-color: white;
-    border-radius: 3% 3%;
+    border-radius: 10% 10%;
 }
 
 .pro_merit_subtitle {
@@ -149,7 +162,7 @@ $sp: 575px;  // スマホ
 
 
 .pro_merit_text {
-    width: 85%;
+    width: 95%;
     margin: 0 auto;
     text-align: center;
     font-size: 18px;
