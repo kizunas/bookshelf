@@ -32,8 +32,8 @@ text-decoration-color:#e5e806;
 
 $pc: 1024px; // PC
 $tab: 992px; // タブレット
-$sp: 575px;  // スマホ
-$under:574px; // より小さいサイズ
+$sp: 320px;  // スマホ
+$under:320px; // より小さいサイズ
 
 @mixin pc {
   @media (min-width: ($pc)) {
@@ -107,8 +107,14 @@ $under:574px; // より小さいサイズ
 .pro_merit_li {
     list-style-type: none;
     text-align: center;
-    background-color: white;
-    border-radius: 10% 10%;
+}
+
+.cir{
+  border-radius: 20% 20%;
+}
+
+.imgs{
+  border-radius: 10% 10%;
 }
 
 .pro_merit_subtitle {
