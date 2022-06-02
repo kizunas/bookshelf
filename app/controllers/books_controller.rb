@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: [:edit, :update, :destroy]
 
   # GET /books
   def index
@@ -13,9 +13,6 @@ class BooksController < ApplicationController
   @keyword = params[:keyword]
   end
 
-  # GET /books/1
-  def show
-  end
 
   # GET /books/new
   def new
