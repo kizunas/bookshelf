@@ -1,20 +1,13 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_book, only: [:edit, :update, :destroy]
-
+  before_action :api, only: [:index]
+  
   # GET /books
   def index
-    @allbooks = current_user.books.all
-    @title = Book.select(:title).first
-    if @title === RakutenWebService::Books::Book.search(title: Book.select(:title).first, sort: '-releaseDate')
-      @books = RakutenWebService::Books::Book.search(title: Book.select(:title).first, sort: '-releaseDate')
-      @rakuten = true
-    else
-      @books = @allbooks
-    end
   end
-  
-  
+    
+
   def search
   @books = current_user.books.all.looks(params[:search], params[:keyword])
   @keyword = params[:keyword]
@@ -72,5 +65,37 @@ class BooksController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def book_params
       params.require(:book).permit(:title, :user_id, tag_ids: [])
+    end
+
+    def api
+    #books
+     sortbooks = Book.order(:created_at)
+     @allbooks = current_user.books.all
+     @total_count = current_user.books.count
+     @rakuten_books_full = []
+     @books_full = []
+     if @total_count >= 1 
+       @allbooks.each do |book|
+         @books_full.push(book)
+       end
+       @books = @books_full
+     else
+       @books = @allbooks
+     end
+     #books_info
+     if @total_count >= 1
+       (@total_count).times do |i|
+         @title = current_user.books.pluck(:title)[i]
+         @rakuten_books = RakutenWebService::Books::Book.search(title: current_user.books.pluck(:title)[i], sort: '-releaseDate', hits: 1)
+         book_page_count = @rakuten_books.response["pageCount"]
+         @rakuten_books_title = @rakuten_books.params[:title]
+         @rakuten_books.each do |book|
+           @rakuten_books_full.push(book)
+         end
+       end
+       @books_info = @rakuten_books_full
+     else
+       @books_info = nil
+     end
     end
 end

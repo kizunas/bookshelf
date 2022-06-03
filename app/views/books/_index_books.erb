@@ -1,0 +1,80 @@
+<% if @books_info.present? %>
+  <% @books.zip(@books_info) do |book, info| %>
+    <div class="card mb-3" data-model_name="<%= Book.model_name.singular %>"
+    data-id="<%= book.id %>">
+      <div class="card-body">
+       <p class="card-text">
+         <div class="cen">
+          <div class="col-2">
+           <% if book.title == info.title %>
+            <%= link_to (image_tag(info.medium_image_url)), info.item_url %>
+           <% else %>
+           <p class="badge badge-danger">no-image</p>
+           <% end %> 
+          </div>
+          <div class="col-6">
+           <% if book.title == info.title %>
+            <span class="badge badge-warning"><%= "発売日:#{info.sales_date}" %></span>
+            <span class="badge badge-success"><%= "著者: #{info.author}" %></span>
+            <br>
+           <% end %> 
+            <%= book.title %> 
+            <br>
+            <%= render partial: "books/tag", collection: book.tags, as: :tag %>
+            <br>
+            <small class="text-muted">
+              <%= book.created_at.strftime('%Y/%m/%d') %>
+            </small>          
+          </div>
+         </div>
+       <div class="text-right position-absolute" style="top: 4px; right: 4px">
+          <div class="btn-group">
+            <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-ellipsis-v align-middle"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right text-middle">
+              <%= link_to "タグ作成・削除", new_tag_path(book), class: "dropdown-item", remote: true %>
+              <%= link_to "編集・タグ付け", edit_book_path(book), class: "dropdown-item", remote: true %>
+              <%= link_to "削除", book, method: :delete, class: "dropdown-item text-danger", remote: true, data: { confirm: '本当に削除しますか？' } %>
+            </div>
+          </div>
+       </div>
+      </div>
+    </div>    
+  <% end %>
+<% else %>
+ <% @books.each do |book| %>
+  <div class="card mb-3" data-model_name="<%= Book.model_name.singular %>"
+  data-id="<%= book.id %>">
+    <div class="card-body">
+     <p class="card-text">
+       <div class="cen">
+        <div class="col-2">
+         <p class="badge badge-danger">no-image</p>
+        </div>
+        <div class="col-6">
+          <%= book.title %> 
+          <br>
+          <%= render partial: "books/tag", collection: book.tags, as: :tag %>
+          <br>
+          <small class="text-muted">
+            <%= book.created_at.strftime('%Y/%m/%d') %>
+          </small>          
+        </div>
+       </div>
+     <div class="text-right position-absolute" style="top: 4px; right: 4px">
+        <div class="btn-group">
+          <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-v align-middle"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right text-middle">
+            <%= link_to "タグ作成・削除", new_tag_path(book), class: "dropdown-item", remote: true %>
+            <%= link_to "編集・タグ付け", edit_book_path(book), class: "dropdown-item", remote: true %>
+            <%= link_to "削除", book, method: :delete, class: "dropdown-item text-danger", remote: true, data: { confirm: '本当に削除しますか？' } %>
+          </div>
+        </div>
+     </div>
+    </div>
+  </div>
+ <% end %>
+<% end %>

@@ -1,21 +1,12 @@
-  <div class="card mb-3" data-model_name="<%= Book.model_name.singular %>"
+<div class="card mb-3" data-model_name="<%= Book.model_name.singular %>"
   data-id="<%= book.id %>">
     <div class="card-body">
      <p class="card-text">
        <div class="cen">
         <div class="col-2">
-         <% if @rakuten %>
-          <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
-         <% else %>
          <p class="badge badge-danger">no-image</p>
-         <% end %> 
         </div>
         <div class="col-6">
-         <% if @rakuten %>
-          <span class="badge badge-warning"><%= "発売日:#{book.sales_date}" %></span>
-          <span class="badge badge-success"><%= "著者: #{book.author}" %></span>
-          <br>
-         <% end %> 
           <%= book.title %> 
           <br>
           <%= render partial: "books/tag", collection: book.tags, as: :tag %>
@@ -39,4 +30,3 @@
      </div>
     </div>
   </div>
-
