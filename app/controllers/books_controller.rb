@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_book, only: [:edit, :update, :destroy]
-  before_action :api, only: [:index]
+  before_action :api, only: [:index, :update]
   
   # GET /books
   def index
@@ -29,8 +29,16 @@ class BooksController < ApplicationController
   # POST /books
   def create
     @book = current_user.books.new(book_params)
-
+    @rakuten_books_full = []
     if @book.save
+       @title = current_user.books.pluck(:title)[0]
+       @rakuten_books = RakutenWebService::Books::Book.search(title: @title, sort: '-releaseDate', hits: 1)
+       book_page_count = @rakuten_books.response["pageCount"]
+       @rakuten_books_title = @rakuten_books.params[:title]
+           @rakuten_books.each do |book|
+             @rakuten_books_full.push(book)
+           end
+       @books_info = @rakuten_books_full           
        @status = true
     else
        render :new
