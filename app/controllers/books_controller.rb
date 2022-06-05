@@ -3,6 +3,7 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:edit, :update, :destroy]
   before_action :api, only: [:index, :update]
   
+
   # GET /books
   def index
   end
@@ -13,9 +14,6 @@ class BooksController < ApplicationController
   @keyword = params[:keyword]
   end
 
-  # GET /books/1
-  def show
-  end
 
   # GET /books/new
   def new
