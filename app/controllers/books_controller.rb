@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_book, only: [:edit, :update, :destroy]
+  before_action :set_book, only: [:edit, :update, :destroy, :deletemodal]
   before_action :api, only: [:index, :update]
   
 
@@ -54,9 +54,18 @@ class BooksController < ApplicationController
     end
   end
 
+  def deletemodal
+  end
+
   # DELETE /books/1
   def destroy
-    @book.destroy
+    if @book.destroy
+      @status = true
+      redirect_to books_path
+    else
+      render :index
+      @status = false
+    end
   end
 
   private

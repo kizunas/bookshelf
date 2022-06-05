@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_tag, only: [:edit, :update, :destroy]
+  before_action :set_tag, only: [:edit, :update, :tagdeletemodal, :destroy]
   before_action :api, only: [:update, :destroy]
 
 
@@ -38,9 +38,17 @@ class TagsController < ApplicationController
     end
   end
 
+  def tagdeletemodal
+  end
+
   # DELETE /tags/1
   def destroy
-    @tag.destroy
+    if @tag.destroy
+      @status = true
+      redirect_to books_path
+    else
+      @status = false
+    end
     
   end
 

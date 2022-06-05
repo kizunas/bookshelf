@@ -38,7 +38,7 @@
             <div class="dropdown-menu dropdown-menu-right text-middle">
               <%= link_to "タグ作成・削除", new_tag_path(book), class: "dropdown-item", remote: true %>
               <%= link_to "編集・タグ付け", edit_book_path(book), class: "dropdown-item", remote: true %>
-              <%= link_to "削除", book, method: :delete, class: "dropdown-item text-danger", remote: true, data: { confirm: '本当に削除しますか？' } %>
+              <%= link_to "削除", deletemodal_path(book), class: "dropdown-item text-danger", remote: true %>
             </div>
           </div>
        </div>
@@ -77,7 +77,7 @@
           <div class="dropdown-menu dropdown-menu-right text-middle">
             <%= link_to "タグ作成・削除", new_tag_path(book), class: "dropdown-item", remote: true %>
             <%= link_to "編集・タグ付け", edit_book_path(book), class: "dropdown-item", remote: true %>
-            <%= link_to "削除", book, method: :delete, class: "dropdown-item text-danger", remote: true, data: { confirm: '本当に削除しますか？' } %>
+            <%= link_to "削除", deletemodal_path(book), class: "dropdown-item text-danger", remote: true %>
           </div>
         </div>
      </div>

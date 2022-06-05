@@ -5,7 +5,12 @@ Rails.application.routes.draw do
   
   
   get 'search' => 'books#search'
-  
+
+  # modalで削除確認画面実装(book)
+  get 'books/:id/deletemodal' => 'books#deletemodal', as: 'deletemodal'
+  # modalで削除確認画面実装(tag)
+  get 'tags/:id/deletemodal' => 'tags#tagdeletemodal', as: 'tagdeletemodal'
+
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
     :sessions => 'users/sessions'   
