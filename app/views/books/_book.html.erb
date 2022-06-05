@@ -12,7 +12,7 @@
            <p class="badge badge-danger">no-image</p>
            <% end %> 
           </div>
-          <div class="col-6">
+          <div class="col-8">
            <% if book.title == info.title %>
             <span class="badge badge-warning"><%= "発売日:#{info.sales_date}" %></span>
             <span class="badge badge-success"><%= "著者: #{info.author}" %></span>
@@ -22,7 +22,6 @@
             <div class="mt-2">
               <%= book.title %> 
             </div>
-            <br>
             <br>
             <div class = "theright">
              <small class="text-muted">
@@ -56,13 +55,12 @@
         <div class="col-2">
          <p class="badge badge-danger">no-image</p>
         </div>
-        <div class="col-6">
+        <div class="col-">
           <%= render partial: "books/tag", collection: book.tags, as: :tag %>
           <br>
           <div class="mt-2">
               <%= book.title %> 
           </div>
-          <br>
           <br>
           <div class = "theright">
              <small class="text-muted">
