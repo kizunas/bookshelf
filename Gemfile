@@ -41,6 +41,9 @@ gem 'rakuten_web_service'
 
 # ページネーションを実装できる
 gem 'kaminari'
+#デバッグツール
+gem 'pry-rails'
+
 
 
 group :development, :test do
