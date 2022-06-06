@@ -1,9 +1,9 @@
 <div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <%= form_with(model: book, remote: true) do |form| %>
+      <%= form_with(model: book, method: :delete, remote: true) do |form| %>
         <div class="modal-header">
-          <h5 class="modal-title" id="bookModal"><%= "#{params[:action].camelize} #{book.model_name.human}title" %></h5>
+          <h5 class="modal-title" id="bookModal">本当に削除しますか？</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -19,24 +19,9 @@
               </ul>
             </div>
           <% end %>
-          <div class="cen" style="padding-bottom: 20px;">
-            <%= book.title %> 
-          </div>
-          <!--collection_check_boxes-->
-          <div class="field">
-            <%= form.collection_check_boxes :tag_ids, current_user.tags, :id, :name do |b| %>
-              <%= b.label(class: "form-check") do %>
-                <%= b.check_box(class: "form-check-input") %>
-                <div class="btn btn-secondary" >
-              <%= b.text %>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-         </div>
         <div class="modal-footer actions">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <%= form.submit "タグ付け"%>
+          <button type="submit" class="btn btn-outline-danger">削除</button>
         </div>
       <% end %>
     </div>

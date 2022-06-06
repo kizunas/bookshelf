@@ -1,0 +1,12 @@
+<!--// modalを閉じる処理-->
+$("#bookModal").modal("hide");
+$("body").removeClass("modal-open");
+$(".modal-backdrop").remove();
+
+<!--// 削除確認モーダル画面-->
+$("#modalArea").html(
+  "<%= j(render 'destroy', book: @book) %>"
+);
+
+<!--// モーダル表示-->
+$("#modalArea").find(".modal").modal("show");

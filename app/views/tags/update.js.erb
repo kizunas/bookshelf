@@ -5,7 +5,7 @@ $('.modal-backdrop').remove();
 
 <% if @status %>
 <!--// すでに表示されているbooksを書き換え-->
-$('#booksIndex').html('<%= j(render partial: "books/book", collection: current_user.books, as: :book) %>')
+$('#booksIndex').html('<%= j(render partial: "books/index_books") %>')
 
 <!--// new tagモーダル画面に戻る（その際、作ったタグが表示されるようにtag:Tag.new）-->
 $("#modalArea").html("<%= j(render 'form', tag: Tag.new) %>")

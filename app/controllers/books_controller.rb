@@ -1,13 +1,14 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_book, only: [:edit, :update, :destroy]
+  before_action :set_book, only: [:edit, :update, :destroy, :deletemodal]
+  before_action :api, only: [:index, :update]
+  
 
   # GET /books
   def index
-    @books = current_user.books.all
   end
-  
-  
+    
+
   def search
   @books = current_user.books.all.looks(params[:search], params[:keyword])
   @keyword = params[:keyword]
@@ -26,8 +27,16 @@ class BooksController < ApplicationController
   # POST /books
   def create
     @book = current_user.books.new(book_params)
-
+    @rakuten_books_full = []
     if @book.save
+       @title = current_user.books.pluck(:title)[0]
+       @rakuten_books = RakutenWebService::Books::Book.search(title: @title, sort: '-releaseDate', hits: 1)
+       book_page_count = @rakuten_books.response["pageCount"]
+       @rakuten_books_title = @rakuten_books.params[:title]
+           @rakuten_books.each do |book|
+             @rakuten_books_full.push(book)
+           end
+       @books_info = @rakuten_books_full           
        @status = true
     else
        render :new
@@ -45,10 +54,18 @@ class BooksController < ApplicationController
     end
   end
 
+  def deletemodal
+  end
+
   # DELETE /books/1
   def destroy
-    @book.destroy
-    
+    if @book.destroy
+      @status = true
+      redirect_to books_path
+    else
+      render :index
+      @status = false
+    end
   end
 
   private
@@ -63,5 +80,37 @@ class BooksController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def book_params
       params.require(:book).permit(:title, :user_id, tag_ids: [])
+    end
+
+    def api
+    #books
+     sortbooks = Book.order(:created_at)
+     @allbooks = current_user.books.all
+     @total_count = current_user.books.count
+     @rakuten_books_full = []
+     @books_full = []
+     if @total_count >= 1 
+       @allbooks.each do |book|
+         @books_full.push(book)
+       end
+       @books = @books_full
+     else
+       @books = @allbooks
+     end
+     #books_info
+     if @total_count >= 1
+       (@total_count).times do |i|
+         @title = current_user.books.pluck(:title)[i]
+         @rakuten_books = RakutenWebService::Books::Book.search(title: current_user.books.pluck(:title)[i], sort: '-releaseDate', hits: 1)
+         book_page_count = @rakuten_books.response["pageCount"]
+         @rakuten_books_title = @rakuten_books.params[:title]
+         @rakuten_books.each do |book|
+           @rakuten_books_full.push(book)
+         end
+       end
+       @books_info = @rakuten_books_full
+     else
+       @books_info = nil
+     end
     end
 end
