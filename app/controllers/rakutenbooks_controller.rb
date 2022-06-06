@@ -13,7 +13,11 @@ class RakutenbooksController < ApplicationController
           book_page_count = @rakuten_books.response["pageCount"]
           @books_full = []
           #ページネーション分岐
-          if book_page_count >= 2
+          if book_page_count >= 6
+            respond_to do |format|
+              format.html { redirect_to new_rakutenbook_url, alert: "検索数が多すぎます" }
+            end
+          elsif book_page_count <=5 and book_page_count >= 2
             (book_page_count).times do |i|
               @books_up = RakutenWebService::Books::Book.search(title: params[:keyword], sort: '-releaseDate', page: i+1)
               @books_up.each do |book|
