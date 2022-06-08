@@ -3,7 +3,6 @@ $("#bookModal").modal("hide");
 $('body').removeClass('modal-open');
 $('.modal-backdrop').remove();
 
-
 <!--// モーダル追加-->
 <% if @books.blank? or nil %>
 $("#modalArea").html("<%= j(render 'notcase', books: @books) %>");
