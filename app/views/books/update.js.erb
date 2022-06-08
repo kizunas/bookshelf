@@ -3,7 +3,6 @@ $("#bookModal").modal("hide");
 $('body').removeClass('modal-open');
 $('.modal-backdrop').remove();
 
-
 <!--// Rails @status => true 画面の書き換え : false モーダルを再度表示-->
 <% if @status %>
 $('#booksIndex').html('<%= j(render partial: "books/index_books") %>')
