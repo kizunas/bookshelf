@@ -6,15 +6,15 @@
        <p class="card-text">
          <div class="cen">
           <div class="col-2">
-           <% if book.title.present? %>
-             <% if book.title == info.title %>
-              <%= link_to (image_tag(info.medium_image_url)), info.item_url %>
-             <% else %>
-             <p class="badge badge-danger">no-image</p>
-             <% end %> 
-           <% else %>
-            <%= link_to "エラーが発生しました。こちらをクリックして、もう一度操作し直してください。", books_path, class: "text-danger" %>
-           <% end %>
+            <% if book.title.present? %>
+              <% if book.title == info.title %>
+               <%= link_to (image_tag(info.medium_image_url)), info.item_url %>
+              <% else %>
+               <p class="badge badge-danger">no-image</p>
+              <% end %> 
+            <% else %>
+              <%= link_to "エラーが発生しました。こちらをクリックして、もう一度操作し直してください。", books_url, class: "text-danger", remote: true %>
+            <% end %>
           </div>
           <div class="col-6">
            <% if book.title == info.title %>
