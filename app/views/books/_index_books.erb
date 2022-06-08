@@ -6,11 +6,16 @@
        <p class="card-text">
          <div class="cen">
           <div class="col-2">
+          <% if book.title.present? %>
            <% if book.title == info.title %>
             <%= link_to (image_tag(info.medium_image_url)), info.item_url %>
            <% else %>
            <p class="badge badge-danger">no-image</p>
            <% end %> 
+          <% else %>
+          <%= link_to "エラーが発生しました。もう一度操作をお願いします。", books_url %>
+          <% end %>
+          
           </div>
           <div class="col-6">
            <% if book.title == info.title %>
