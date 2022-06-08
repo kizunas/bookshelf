@@ -3,7 +3,6 @@ $("#bookModal").modal("hide");
 $('body').removeClass('modal-open');
 $('.modal-backdrop').remove();
 
-
 <!--formの呼び出し-->
 $("#modalArea").html("<%= j(render 'form', book: @book) %>")
 <!--登録冊数を０に-->
