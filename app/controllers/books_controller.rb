@@ -47,6 +47,13 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   def update
     if @book.update(book_params)
+      if @book.title.present?
+         @status = true
+      else
+        respond_to do |format|
+          format.html { redirect_to books_url, notice: "エラーが発生しました。もう一度操作を行ってください。" }
+        end
+      end
        @status = true
     else
       render :edit
