@@ -1,20 +1,16 @@
 <% if @books_info.present? %>
-  <% @books.zip(@books_info) do |book, info| %>
+  <% @books_info.zip(@books) do |info, book| %>
     <div class="card mb-3 " data-model_name="<%= Book.model_name.singular %>"
     data-id="<%= book.id %>">
       <div class="card-body">
        <p class="card-text">
          <div class="cen">
           <div class="col-2">
-            <% if book.title.present? %>
-              <% if book.title == info.title %>
-               <%= link_to (image_tag(info.medium_image_url)), info.item_url %>
-              <% else %>
-               <p class="badge badge-danger">no-image</p>
-              <% end %> 
-            <% else %>
-              <%= link_to "エラーが発生しました。こちらをクリックして、もう一度操作し直してください。", books_url, class: "text-danger", remote: true %>
-            <% end %>
+           <% if book.title == info.title %>
+            <%= link_to (image_tag(info.medium_image_url)), info.item_url %>
+           <% else %>
+           <p class="badge badge-danger">no-image</p>
+           <% end %> 
           </div>
           <div class="col-6">
            <% if book.title == info.title %>
