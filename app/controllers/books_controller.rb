@@ -48,6 +48,7 @@ class BooksController < ApplicationController
   def update
     if @book.update(book_params)
        @status = true
+       redirect_to books_path
     else
       render :edit
       @status = false
@@ -61,7 +62,9 @@ class BooksController < ApplicationController
   def destroy
     if @book.destroy
       @status = true
-      redirect_to books_path
+      respond_to do |format|
+        format.html { redirect_to books_url, notice: "削除しました。" }
+      end
     else
       render :index
       @status = false
