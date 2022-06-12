@@ -2,4 +2,4 @@
 $('[data-model_name="tag"]').filter('[data-id="<%= @tag.id %>"]').remove();
 
 <!--// すでに表示されているbooksを書き換え-->
-$('#booksIndex').html('<%= j(render partial: "books/index_books") %>')
+$('#booksIndex').html('<%= j(render partial: "books/index_books", book: @books) %>')

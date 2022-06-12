@@ -42,7 +42,7 @@ gem 'rakuten_web_service'
 # ページネーションを実装できる
 gem 'kaminari'
 #デバッグツール
-# gem 'pry-rails'
+gem 'pry-rails'
 
 
 

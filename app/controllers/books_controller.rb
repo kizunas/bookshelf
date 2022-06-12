@@ -47,14 +47,8 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   def update
     if @book.update(book_params)
-      if @book.title.present?
-         @status = true
-      else
-        respond_to do |format|
-          format.html { redirect_to books_url, notice: "エラーが発生しました。もう一度操作を行ってください。" }
-        end
-      end
        @status = true
+       redirect_to books_path
     else
       render :edit
       @status = false
@@ -68,7 +62,9 @@ class BooksController < ApplicationController
   def destroy
     if @book.destroy
       @status = true
-      redirect_to books_path
+      respond_to do |format|
+        format.html { redirect_to books_url, notice: "削除しました。" }
+      end
     else
       render :index
       @status = false
