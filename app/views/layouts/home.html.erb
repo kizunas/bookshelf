@@ -9,12 +9,18 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+    <div id="loading">
+      <div id="loading_box">
+        <div class="loading-one animation_loading">
+          <p class="loading-txt">Loading</p>
+        </div>
+      </div>
+    </div>
       <%= render "layouts/flash" %>
-      <div id="wrapper">
+       <div id="wrapper">
         <%= yield %>
-      
-      <div class="mt-5">
-        <ul class="pro_merit_ul ">
+         <div class="mt-5">
+          <ul class="pro_merit_ul ">
             <div class= "mb-3 col-sm-6 col-md-6 col-lg-6 col-xl-6">
               <li class="pro_merit_li">
               <%= image_tag "/assets/reg.png", class: "imgs" %> 
@@ -25,8 +31,8 @@
               <%= image_tag "/assets/search.png", class: "imgs" %> 
               </li>
             </div>
-        </ul>
-      </div>
-      </div>
+          </ul>
+         </div>
+       </div>
   </body>
 </html>
