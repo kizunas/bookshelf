@@ -1,3 +1,4 @@
+
 <% if @books_info.present? %>
   <% @books_info.zip(@books) do |info, book| %>
     <div class="card mb-3 " data-model_name="<%= Book.model_name.singular %>"

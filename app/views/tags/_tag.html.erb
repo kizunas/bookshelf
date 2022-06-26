@@ -2,7 +2,7 @@
   <%= link_to edit_tag_path(tag), remote: true do %>
     <div class="btn btn-secondary mr-1 mb-2"><%= tag.name %></div>
   <% end %>
-  <%= link_to tagdeletemodal_path(tag), class: "text-danger", remote: true do %>
+  <%= link_to tagdeletemodal_path(tag), class: "text-danger", remote: true, data: {"turbolinks" => false} do %>
     <i class="fas fa-times text-danger"></i>
   <% end %>
 </div>

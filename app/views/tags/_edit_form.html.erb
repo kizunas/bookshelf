@@ -1,7 +1,7 @@
 <div class="modal fade" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="tagModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <%= form_with(model: tag, remote: true) do |form| %>
+      <%= form_with(model: tag, method: :patch, url: loading_path, remote: true) do |form| %>
         <div class="modal-header">
           <h5 class="modal-title" id="tagModal"><%= "#{params[:action].camelize} #{tag.model_name.human}" %></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
@@ -28,9 +28,27 @@
           <%= link_to new_tag_path, remote: true do %>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <% end %>
-          <%= form.submit "タグの修正"%>
+          <%= form.submit "タグの修正" ,id= "btn"%>
         </div>
       <% end %>
     </div>
   </div>
 </div>
+
+<script>
+      var btn = document.getElementById('btn');
+
+      btn.addEventListener('click', function() {
+        var mydiv = document.getElementById("btn");
+
+        mydiv.innerHTML = "クリック後";
+
+      }, false);
+
+</script>
+
+
+<button class="btn btn-primary" type="button" disabled>
+  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  Loading...
+</button>

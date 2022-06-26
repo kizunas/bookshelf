@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   
   
   get 'search' => 'books#search'
+  get 'loading' => 'tags#loading'
 
   # modalで削除確認画面実装(book)
   get 'books/:id/deletemodal' => 'books#deletemodal', as: 'deletemodal'

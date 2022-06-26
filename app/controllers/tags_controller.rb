@@ -6,7 +6,36 @@ class TagsController < ApplicationController
 
   # GET /tags
   def index
+    render loading_path
     @tags = current_user.tags.all
+    sortbooks = Book.order(:created_at)
+       @allbooks = current_user.books.all
+       @total_count = current_user.books.count
+       @rakuten_books_full = []
+       @books_full = []
+       if @total_count >= 1 
+         @allbooks.each do |book|
+           @books_full.push(book)
+         end
+         @books = @books_full
+       else
+         @books = @allbooks
+       end
+       #books_info
+       if @total_count >= 1
+         (@total_count).times do |i|
+           @title = current_user.books.pluck(:title)[i]
+           @rakuten_books = RakutenWebService::Books::Book.search(title: current_user.books.pluck(:title)[i], sort: '-releaseDate', hits: 1)
+           book_page_count = @rakuten_books.response["pageCount"]
+           @rakuten_books_title = @rakuten_books.params[:title]
+           @rakuten_books.each do |book|
+             @rakuten_books_full.push(book)
+           end
+         end
+         @books_info = @rakuten_books_full
+       else
+         @books_info = nil
+       end
   end
 
   # GET /tags/new
@@ -29,6 +58,11 @@ class TagsController < ApplicationController
     end
   end
 
+  def loading
+    
+  end
+
+
   # PATCH/PUT /tags/1
   def update
     if @tag.update(tag_params)
@@ -45,7 +79,6 @@ class TagsController < ApplicationController
   def destroy
     if @tag.destroy
       @status = true
-      redirect_to books_path
     else
       @status = false
     end
