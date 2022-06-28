@@ -28,9 +28,20 @@
           <%= link_to new_tag_path, remote: true do %>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <% end %>
-          <%= form.submit "タグの修正"%>
+          <%= form.submit "タグの修正", class: "btndel", id: "" %>
+           <button id="hidden" class="btn btn-danger ary" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+           </button>
         </div>
       <% end %>
     </div>
   </div>
 </div>
+
+<script>
+  $('.btndel').on('click',function(){
+    $('.btndel').attr('id', 'hidden');
+    $('.ary').attr('id', 'append');
+  })
+</script>

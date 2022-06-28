@@ -21,9 +21,20 @@
           <% end %>
         <div class="modal-footer actions">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <button type="submit" class="btn btn-outline-danger">削除</button>
+          <button type="submit" class="btn btn-outline-danger btndel" id="">削除</button>
+           <button id="hidden" class="btn btn-danger ary" type="button" disabled>
+             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+           </button>
         </div>
       <% end %>
     </div>
   </div>
 </div>
+
+<script>
+  $('.btndel').on('click',function(){
+    $('.btndel').attr('id', 'hidden');
+    $('.ary').attr('id', 'append');
+  })
+</script>
