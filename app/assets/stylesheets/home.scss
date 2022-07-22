@@ -163,8 +163,7 @@ $under:320px; // より小さいサイズ
     left: 0;
     width: 100%;
     height: 100%;
-    border-radius: 50%;
-    
+    border-radius: 50%;  
 }
 
 
@@ -173,4 +172,52 @@ $under:320px; // より小さいサイズ
     margin: 0 auto;
     text-align: center;
     font-size: 18px;
+}
+
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 99999;
+  width: 100%;
+  height: 100%;
+  background-image: image-url("bookshelf.jpg");
+}
+#loading_box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+}
+.loading-one {
+  display: inline-block;
+  // border-top: 3px solid #fff;
+  // border-bottom: 3px solid #fff;
+}
+.loading_image{
+  padding-top: 3px;
+  padding-bottom: 3px;
+  height: 70%;
+  width: 70%;
+  border-radius: 50%;
+}
+
+// アニメーション
+.animation_loading {
+  animation: equalizer_loading 7000ms infinite;
+  animation-iteration-count: 10;
+}
+@keyframes equalizer_loading {
+  0% {
+    width: 0%;
+  }
+
+  20% {
+    width: 50%;
+  }
+  
+  
 }

@@ -5,9 +5,9 @@ $('.modal-backdrop').remove();
 
 <!--// Rails @status => true 画面の書き換え : false モーダルを再度表示-->
 <% if @status %>
-$('#booksIndex').html('<%= j(render partial: "books/index_books", book: @books) %>')
-
+$('[data-model_name="book"]').filter('[data-id="<%= @book.id %>"]').replaceWith("<%= j(render @book) %>")
 <% else %>
 $("#modalArea").html("<%= j(render 'form', book: @book) %>")
 $("#modalArea").find(".modal").modal('show')
 <% end %>
+
