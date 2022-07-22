@@ -96,6 +96,7 @@ class BooksController < ApplicationController
      sortbooks = Book.order(:created_at)
      @allbooks = current_user.books.all
      @total_count = current_user.books.count
+     @counter = (@total_count+1)
      @rakuten_books_full = []
      @books_full = []
      if @total_count >= 1 
@@ -110,12 +111,19 @@ class BooksController < ApplicationController
      if @total_count >= 1
        (@total_count).times do |i|
          @title = current_user.books.pluck(:title)[i]
-         @rakuten_books = RakutenWebService::Books::Book.search(title: current_user.books.pluck(:title)[i], sort: '-releaseDate', hits: 1)
-         book_page_count = @rakuten_books.response["pageCount"]
-         @rakuten_books_title = @rakuten_books.params[:title]
-         @rakuten_books.each do |book|
-           @rakuten_books_full.push(book)
-         end
+           @rakuten_books = RakutenWebService::Books::Book.search(title: @title, sort: '-releaseDate', hits: 1)
+             if @rakuten_books.response["hits"] == 0
+                  @rakuten_books = RakutenWebService::Books::Book.search(title: "クジラの進化", sort: '-releaseDate', hits: 1)
+                    @rakuten_books.each do |book|
+                      @rakuten_books_full.push(book)
+                    end
+             else
+                @rakuten_books = RakutenWebService::Books::Book.search(title: @title, sort: '-releaseDate', hits: 1)
+                  @rakuten_books_title = @rakuten_books.params[:title]
+                    @rakuten_books.each do |book|
+                      @rakuten_books_full.push(book)
+                    end
+             end
        end
        @books_info = @rakuten_books_full
      else
@@ -123,3 +131,4 @@ class BooksController < ApplicationController
      end
     end
 end
+
